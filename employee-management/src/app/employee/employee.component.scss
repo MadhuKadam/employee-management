@@ -1,0 +1,22 @@
+:host {
+    display: flex;
+    margin: 82px auto 32px;
+    padding: 0 16px;
+    flex-direction: column;
+
+    .filter-row {
+        margin-bottom: 15px;
+
+        .filter-input {
+            margin-bottom: 10px;
+        }
+    }
+
+    .emp-table {
+        margin-bottom: 20px;
+
+        thead {
+            background-color: rgba(0, 0, 0, .03);
+        }
+    }
+}

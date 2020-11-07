@@ -1,0 +1,74 @@
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header"> <strong>Filters</strong></div>
+                <div class="card-body">
+
+                    <div class="row filter-row">
+                        <label class="col-md-12">Enter Name </label>
+                        <div class="col-md-12 filter-input">
+                            <input class="form-control" type="text" [(ngModel)]="searchText" />
+                        </div>
+                        <label class="col-md-12">Enter Experiece </label>
+                        <div class="col-md-12 filter-input">
+                            <input class="form-control" type="number" [(ngModel)]="experience"
+                                (blur)="findEmployeesByExp(experience)" />
+                        </div>
+                        <label class="col-md-12">Select Department</label>
+                        <div class="col-md-12 filter-input">
+                            <select class="form-control" [(ngModel)]="department"
+                                (change)="removeEmployeesByDepartment(department)">
+                                <option value="HR">HR</option>
+                                <option value="Finance">Finance</option>
+                                <option value="Operations">Operations</option>
+                                <option value="Development">Development</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12 filter-input">
+                            <a class="btn btn-primary btn-sm" (click)="getEmployeeCoutByDepartment()">Employees by
+                                department</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <table class="table table-hover emp-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Sr. No.</th>
+                        <th scope="col" (click)="sortByName()">Employee Name</th>
+                        <th scope="col">Department</th>
+                        <th scope="col" (click)="sortDate()">Joining Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let employee of employeeList | search:searchText; let i = index">
+                        <th scope="row">{{i + 1}}</th>
+                        <td>{{employee.name}}</td>
+                        <td>{{employee.department}}</td>
+                        <td>{{ getDate(employee.joining_date)|date:'dd/MM/yyyy'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-hover emp-table" *ngIf="employeesByDepartment?.length > 0">
+                <thead>
+                    <tr>
+                        <th scope="col">Sr. No.</th>
+                        <th scope="col">Department</th>
+                        <th scope="col">Employee Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let employee of employeesByDepartment; let i = index">
+                        <th scope="row">{{i + 1}}</th>
+                        <td>{{employee.dept}}</td>
+                        <td>{{employee.employeesCount}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
